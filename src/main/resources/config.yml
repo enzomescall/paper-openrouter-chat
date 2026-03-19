@@ -1,0 +1,27 @@
+# OpenRouter API key.
+# Leave blank in version control. You can also set it in-game with:
+# /openrouter add-key <your-key>
+api-key: ""
+
+# OpenRouter model id.
+model: "openai/gpt-4.1-mini"
+
+# Optional site metadata sent to OpenRouter.
+site-url: ""
+site-name: "Paper OpenRouter Chat"
+
+# Prompt tuning.
+system-prompt: "You are a helpful Minecraft server assistant. Keep answers concise and useful for in-game chat."
+max-tokens: 300
+temperature: 0.7
+
+# Networking.
+timeout-seconds: 45
+
+# Chat output.
+response-prefix: "&b[OpenRouter] &f"
+error-prefix: "&c[OpenRouter] &7"
+thinking-message: "&e[OpenRouter] &7&oThinking..."
+
+# If true, only operators can use the chat command even if permissions are granted.
+ops-only-chat: false

@@ -1,0 +1,19 @@
+name: OpenRouterChat
+version: '0.1.0'
+main: dev.enzomescall.openrouterchat.OpenRouterChatPlugin
+api-version: '1.21'
+author: Enzo / Pascal
+website: https://github.com/enzomescall/paper-openrouter-chat
+description: Chat with OpenRouter models from inside a Paper server.
+commands:
+  openrouter:
+    description: Send prompts to OpenRouter or manage plugin settings
+    usage: /openrouter <message> | /openrouter add-key <api-key> | /openrouter clear-key | /openrouter reload | /openrouter status
+    aliases: [orc, llm]
+permissions:
+  openrouterchat.use:
+    description: Allows using /openrouter <message>
+    default: op
+  openrouterchat.manage:
+    description: Allows setting the API key and managing plugin configuration
+    default: op
