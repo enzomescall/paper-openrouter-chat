@@ -4,15 +4,17 @@
 [![Paper](https://img.shields.io/badge/platform-Paper-ffffff?logo=minecraft&logoColor=black)](https://papermc.io/)
 [![Java 21](https://img.shields.io/badge/java-21-orange)](https://adoptium.net/)
 
-A Paper plugin that lets players chat with an OpenRouter model directly from inside the game.
+A Paper plugin that lets players send a prompt to an OpenRouter model and receive the reply in chat. Each `/openrouter` invocation is a single, stateless request — the plugin does not keep conversation history between messages.
 
 ## Features
 
 - Direct OpenRouter API integration
+- Single-turn prompts only (no conversation memory between messages)
 - No bundled secrets or API keys
-- In-game operator command to save the API key
-- Configurable model, prompt, timeout, and chat formatting
+- Operator command to save the API key from in-game or the server console
+- Configurable model, system prompt, timeout, and chat formatting
 - Permission nodes for normal usage vs management
+- Optional `ops-only-chat` toggle that requires operator status on top of the use permission
 
 ## Setup
 
@@ -21,11 +23,13 @@ A Paper plugin that lets players chat with an OpenRouter model directly from ins
 3. Restart the server
 4. Set your OpenRouter API key using either:
    - config file: `plugins/OpenRouterChat/config.yml`
-   - in-game as op: `/openrouter add-key <your-key>`
+   - in-game (as op) or from the server console: `/openrouter add-key <your-key>`
 
 ## Commands
 
-- `/openrouter <message>` — send a prompt to the configured OpenRouter model
+The `/openrouter <message>` form must be run by a player so the response can be delivered to them. The management subcommands (`add-key`, `clear-key`, `reload`, `status`) can be run from either an in-game player with the manage permission or the server console.
+
+- `/openrouter <message>` — send a prompt to the configured OpenRouter model (player only)
 - `/openrouter add-key <api-key>` — save the OpenRouter API key
 - `/openrouter clear-key` — remove the stored API key
 - `/openrouter reload` — reload config
@@ -60,6 +64,8 @@ error-prefix: "&c[OpenRouter] &7"
 thinking-message: "&e[OpenRouter] &7&oThinking..."
 ops-only-chat: false
 ```
+
+`ops-only-chat` is an extra gate on top of the `openrouterchat.use` permission. When set to `true`, only server operators can run `/openrouter <message>`, even if non-op players have been granted `openrouterchat.use`. When `false` (the default), the permission node alone controls access.
 
 ## Build
 

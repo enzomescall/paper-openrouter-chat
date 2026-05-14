@@ -50,39 +50,38 @@ public final class OpenRouterChatPlugin extends JavaPlugin {
             return false;
         }
 
-        if (!(sender instanceof Player player)) {
-            sender.sendMessage(colorize(errorPrefix + "Only players can use this command."));
-            return true;
-        }
-
         if (args.length == 0) {
-            sendUsage(player, label);
+            sendUsage(sender, label);
             return true;
         }
 
         String subcommand = args[0].toLowerCase(Locale.ROOT);
         switch (subcommand) {
             case "add-key":
-                return handleAddKey(player, args, label);
+                return handleAddKey(sender, args, label);
             case "clear-key":
-                return handleClearKey(player);
+                return handleClearKey(sender);
             case "reload":
-                return handleReload(player);
+                return handleReload(sender);
             case "status":
-                return handleStatus(player);
+                return handleStatus(sender);
             default:
+                if (!(sender instanceof Player player)) {
+                    sender.sendMessage(colorize(errorPrefix + "Only players can send prompts."));
+                    return true;
+                }
                 return handlePrompt(player, args);
         }
     }
 
-    private boolean handleAddKey(Player player, String[] args, String label) {
-        if (!player.hasPermission("openrouterchat.manage")) {
-            player.sendMessage(colorize(errorPrefix + "You do not have permission to manage this plugin."));
+    private boolean handleAddKey(CommandSender sender, String[] args, String label) {
+        if (!sender.hasPermission("openrouterchat.manage")) {
+            sender.sendMessage(colorize(errorPrefix + "You do not have permission to manage this plugin."));
             return true;
         }
 
         if (args.length < 2) {
-            player.sendMessage(colorize("&eUsage: /" + label + " add-key <api-key>"));
+            sender.sendMessage(colorize("&eUsage: /" + label + " add-key <api-key>"));
             return true;
         }
 
@@ -95,44 +94,44 @@ public final class OpenRouterChatPlugin extends JavaPlugin {
         getConfig().set("api-key", newKey);
         saveConfig();
         reloadSettings();
-        player.sendMessage(colorize("&a[OpenRouter] &7API key saved."));
+        sender.sendMessage(colorize("&a[OpenRouter] &7API key saved."));
         return true;
     }
 
-    private boolean handleClearKey(Player player) {
-        if (!player.hasPermission("openrouterchat.manage")) {
-            player.sendMessage(colorize(errorPrefix + "You do not have permission to manage this plugin."));
+    private boolean handleClearKey(CommandSender sender) {
+        if (!sender.hasPermission("openrouterchat.manage")) {
+            sender.sendMessage(colorize(errorPrefix + "You do not have permission to manage this plugin."));
             return true;
         }
 
         getConfig().set("api-key", "");
         saveConfig();
         reloadSettings();
-        player.sendMessage(colorize("&a[OpenRouter] &7API key cleared."));
+        sender.sendMessage(colorize("&a[OpenRouter] &7API key cleared."));
         return true;
     }
 
-    private boolean handleReload(Player player) {
-        if (!player.hasPermission("openrouterchat.manage")) {
-            player.sendMessage(colorize(errorPrefix + "You do not have permission to manage this plugin."));
+    private boolean handleReload(CommandSender sender) {
+        if (!sender.hasPermission("openrouterchat.manage")) {
+            sender.sendMessage(colorize(errorPrefix + "You do not have permission to manage this plugin."));
             return true;
         }
 
         reloadConfig();
         reloadSettings();
-        player.sendMessage(colorize("&a[OpenRouter] &7Configuration reloaded."));
+        sender.sendMessage(colorize("&a[OpenRouter] &7Configuration reloaded."));
         return true;
     }
 
-    private boolean handleStatus(Player player) {
-        if (!player.hasPermission("openrouterchat.manage")) {
-            player.sendMessage(colorize(errorPrefix + "You do not have permission to view plugin status."));
+    private boolean handleStatus(CommandSender sender) {
+        if (!sender.hasPermission("openrouterchat.manage")) {
+            sender.sendMessage(colorize(errorPrefix + "You do not have permission to view plugin status."));
             return true;
         }
 
-        player.sendMessage(colorize("&b[OpenRouter] &fModel: &a" + model));
-        player.sendMessage(colorize("&b[OpenRouter] &fAPI key configured: " + (apiKey.isBlank() ? "&cno" : "&ayes")));
-        player.sendMessage(colorize("&b[OpenRouter] &fOps-only chat: " + (opsOnlyChat ? "&ayes" : "&cno")));
+        sender.sendMessage(colorize("&b[OpenRouter] &fModel: &a" + model));
+        sender.sendMessage(colorize("&b[OpenRouter] &fAPI key configured: " + (apiKey.isBlank() ? "&cno" : "&ayes")));
+        sender.sendMessage(colorize("&b[OpenRouter] &fOps-only chat: " + (opsOnlyChat ? "&ayes" : "&cno")));
         return true;
     }
 
@@ -226,9 +225,9 @@ public final class OpenRouterChatPlugin extends JavaPlugin {
         return true;
     }
 
-    private void sendUsage(Player player, String label) {
-        player.sendMessage(colorize("&eUsage: /" + label + " <message>"));
-        player.sendMessage(colorize("&eAdmin: /" + label + " add-key <api-key>, /" + label + " clear-key, /" + label + " reload, /" + label + " status"));
+    private void sendUsage(CommandSender sender, String label) {
+        sender.sendMessage(colorize("&eUsage: /" + label + " <message>"));
+        sender.sendMessage(colorize("&eAdmin: /" + label + " add-key <api-key>, /" + label + " clear-key, /" + label + " reload, /" + label + " status"));
     }
 
     private void sendError(Player player, String msg) {
