@@ -5,7 +5,7 @@
 
     <groupId>dev.enzomescall</groupId>
     <artifactId>paper-openrouter-chat</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
     <packaging>jar</packaging>
 
     <name>Paper OpenRouter Chat</name>
