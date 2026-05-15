@@ -81,7 +81,8 @@ target/paper-openrouter-chat-0.1.0.jar
 
 ## Compatibility
 
-- Paper `1.21.4`
+- Written for Paper `1.21.4`
+- Confirmed working on Paper `26.1.2`
 - Java `21`
 
 ## Security note
