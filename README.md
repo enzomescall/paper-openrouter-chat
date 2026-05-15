@@ -2,7 +2,7 @@
 
 [![GitHub release](https://img.shields.io/github/v/release/enzomescall/paper-openrouter-chat?display_name=tag)](https://github.com/enzomescall/paper-openrouter-chat/releases)
 [![Paper](https://img.shields.io/badge/platform-Paper-ffffff?logo=minecraft&logoColor=black)](https://papermc.io/)
-[![Java 21](https://img.shields.io/badge/java-21-orange)](https://adoptium.net/)
+[![Java 25](https://img.shields.io/badge/java-25-orange)](https://adoptium.net/)
 
 A Paper plugin that lets players send a prompt to an OpenRouter model and receive the reply in chat. Each `/openrouter` invocation is a single, stateless request — the plugin does not keep conversation history between messages.
 
@@ -81,8 +81,8 @@ target/paper-openrouter-chat-0.1.0.jar
 
 ## Compatibility
 
-- Paper `1.26.0`
-- Java `21`
+- Paper `26.1.2`
+- Java `25`
 
 ## Security note
 
