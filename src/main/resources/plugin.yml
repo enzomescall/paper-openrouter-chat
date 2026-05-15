@@ -1,7 +1,7 @@
 name: OpenRouterChat
 version: '0.1.0'
 main: dev.enzomescall.openrouterchat.OpenRouterChatPlugin
-api-version: '1.21'
+api-version: '1.26'
 author: Enzo / Pascal
 website: https://github.com/enzomescall/paper-openrouter-chat
 description: Chat with OpenRouter models from inside a Paper server.
